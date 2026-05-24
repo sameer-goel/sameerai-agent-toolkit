@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SameerAI Agent Toolkit</title>
+  <style>
+    :root {
+      --bg: #060606;
+      --text: #F8F5F0;
+      --gold: #F8D264;
+      --muted: #8a8680;
+      --card-bg: #111110;
+      --green: #4ade80;
+      --blue: #60a5fa;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      min-height: 100vh;
+      padding: 3rem 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    a { color: var(--gold); }
+    h1 { font-size: 2.6rem; font-weight: 300; color: var(--gold); margin-bottom: 0.3rem; }
+    .tagline { font-size: 1.2rem; color: var(--muted); margin-bottom: 3rem; }
+    h2 { font-size: 1.5rem; font-weight: 400; color: var(--gold); margin: 3rem 0 1.2rem; border-bottom: 1px solid #222; padding-bottom: 0.4rem; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .stat { background: var(--card-bg); border-radius: 8px; padding: 1.2rem; text-align: center; }
+    .stat-number { font-size: 2rem; font-weight: 700; color: var(--gold); }
+    .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
+    .component { background: var(--card-bg); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; border-left: 3px solid var(--green); }
+    .component-name { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .component-desc { font-size: 0.95rem; color: var(--muted); }
+    .code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.8rem; background: #1a1a1a; padding: 1.2rem; border-radius: 6px; overflow-x: auto; margin: 1rem 0; white-space: pre; color: var(--text); line-height: 1.5; }
+    .flow { display: flex; flex-direction: column; gap: 0.5rem; margin: 1.5rem 0; }
+    .flow-step { display: flex; align-items: center; gap: 0.8rem; }
+    .flow-arrow { color: var(--gold); font-size: 1.2rem; min-width: 24px; text-align: center; }
+    .flow-box { background: var(--card-bg); border: 1px solid #333; border-radius: 6px; padding: 0.6rem 1rem; font-size: 0.9rem; flex: 1; }
+    .cta { margin-top: 3rem; text-align: center; }
+    .cta a { display: inline-block; background: var(--gold); color: var(--bg); padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 1.1rem; }
+    .cta a:hover { opacity: 0.9; }
+    footer { margin-top: 4rem; text-align: center; font-size: 0.8rem; color: var(--muted); }
+    .badge { display: inline-block; font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 3px; margin-left: 0.5rem; vertical-align: middle; }
+    .badge-live { background: #1a3a2a; color: var(--green); }
+    .badge-python { background: #1a2a4a; color: var(--blue); }
+  </style>
+</head>
+<body>
+  <h1>SameerAI Agent Toolkit</h1>
+  <p class="tagline">Infrastructure for AI coding agents that route, remember, and self-organize.</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Model tiers routed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">30+</div>
+      <div class="stat-label">Skills auto-discovered</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">&lt;50ms</div>
+      <div class="stat-label">Routing latency</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">40+</div>
+      <div class="stat-label">Sessions/week</div>
+    </div>
+  </div>
+
+  <h2>How It Works</h2>
+
+  <div class="flow">
+    <div class="flow-step">
+      <span class="flow-arrow">1</span>
+      <div class="flow-box">User prompt arrives via Claude Code hook</div>
+    </div>
+    <div class="flow-step">
+      <span class="flow-arrow">2</span>
+      <div class="flow-box"><strong>Model Router</strong> classifies: Haiku (reads) / Sonnet (dev) / Opus (architecture)</div>
+    </div>
+    <div class="flow-step">
+      <span class="flow-arrow">3</span>
+      <div class="flow-box"><strong>Skill Matcher</strong> fuzzy-matches intent against 30+ registered skills</div>
+    </div>
+    <div class="flow-step">
+      <span class="flow-arrow">4</span>
+      <div class="flow-box">Agent executes with full <strong>memory context</strong> (semantic + episodic + working)</div>
+    </div>
+    <div class="flow-step">
+      <span class="flow-arrow">5</span>
+      <div class="flow-box"><strong>Auto-capture</strong> persists decisions, corrections, files for next session</div>
+    </div>
+  </div>
+
+  <h2>Components</h2>
+
+  <div class="component">
+    <div class="component-name">Model Router <span class="badge badge-python">Python</span> <span class="badge badge-live">production</span></div>
+    <div class="component-desc">Regex-based classifier. Reads prompt, matches against Opus signals (architecture, security, tradeoffs) and Haiku signals (reads, searches, renames). Routes to correct model tier. No LLM call, pure pattern match.</div>
+  </div>
+
+  <div class="component">
+    <div class="component-name">Skill Matcher <span class="badge badge-python">Python</span> <span class="badge badge-live">production</span></div>
+    <div class="component-desc">Scans all skill directories, extracts keywords from SKILL.md descriptions, fuzzy-matches against user intent, injects top matches as context. Agent discovers capabilities on every prompt.</div>
+  </div>
+
+  <div class="component">
+    <div class="component-name">Memory Protocol <span class="badge badge-live">production</span></div>
+    <div class="component-desc">Three-layer persistence: semantic (cross-session, manual prune), episodic (per-tab, auto-prune at 50 facts/7d/30d), working (current turn). Frontmatter-based format with typed categories.</div>
+  </div>
+
+  <div class="component">
+    <div class="component-name">Backend Switcher</div>
+    <div class="component-desc">Manages multiple AWS Bedrock profiles. Swap between free/paid/isolated accounts with one command. Settings stored as named JSON configs, copied to active on switch.</div>
+  </div>
+
+  <div class="component">
+    <div class="component-name">Task Router</div>
+    <div class="component-desc">Classifies task intent and dispatches to correct execution backend. Enterprise tasks, coding tasks, and planning tasks each go to their optimal environment. Human approves routing.</div>
+  </div>
+
+  <h2>Example: Model Router in Action</h2>
+
+  <div class="code">$ echo '{"tool_input":{"prompt":"review the authentication architecture"}}' | python3 model-router-classify.py
+
+{
+  "systemMessage": "[model-router] OPUS tier - architecture review",
+  "hookSpecificOutput": {
+    "hookEventName": "UserPromptSubmit",
+    "additionalContext": "model-router pre-classification: OPUS tier (architecture review). Recommended model: claude-opus-4-7."
+  }
+}
+
+$ echo '{"tool_input":{"prompt":"rename getUserById to fetchUser"}}' | python3 model-router-classify.py
+
+{
+  "systemMessage": "[model-router] HAIKU tier - mechanical rename",
+  ...
+}</div>
+
+  <h2>Built For</h2>
+  <p>YC S26 RFS #12: <strong>Software for Agents</strong>. Machine-readable interfaces enabling AI agents to discover, access, and use tools programmatically.</p>
+  <p>This toolkit solves the problem from the inside: an agent that knows what model to use, what skills it has, and what it learned yesterday, without being told every session.</p>
+
+  <div class="cta">
+    <a href="https://github.com/sameer-goel/sameerai-agent-toolkit">View Source on GitHub</a>
+  </div>
+
+  <footer>
+    Built by Sameer Goel. Running daily since May 2026.<br>
+    Claude Code + AWS Bedrock + Cloudflare.
+  </footer>
+</body>
+</html>
