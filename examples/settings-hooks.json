@@ -1,0 +1,23 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "type": "command",
+        "command": "python3 ~/.claude/model-router-classify.py",
+        "timeout": 2000
+      },
+      {
+        "type": "command",
+        "command": "python3 ~/.claude/hooks/skill-matcher.py",
+        "timeout": 3000
+      }
+    ],
+    "PreCompact": [
+      {
+        "type": "command",
+        "command": "~/.claude/episodic/episodic.sh capture $SESSION_ID summary \"Context compaction triggered\"",
+        "timeout": 1000
+      }
+    ]
+  }
+}
