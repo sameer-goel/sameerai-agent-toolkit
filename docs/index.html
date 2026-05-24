@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SameerAI Agent Toolkit</title>
+  <title>YC S26 Ideas x My Work</title>
   <style>
     :root {
       --bg: #060606;
@@ -12,7 +12,10 @@
       --muted: #8a8680;
       --card-bg: #111110;
       --green: #4ade80;
+      --yellow: #facc15;
+      --red: #f87171;
       --blue: #60a5fa;
+      --purple: #a78bfa;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -20,141 +23,429 @@
       color: var(--text);
       font-family: 'Cormorant Garamond', Georgia, serif;
       min-height: 100vh;
-      padding: 3rem 1.5rem;
-      max-width: 800px;
+      padding: 2rem 1.5rem;
+      max-width: 900px;
       margin: 0 auto;
-      line-height: 1.7;
+      line-height: 1.6;
     }
-    a { color: var(--gold); }
-    h1 { font-size: 2.6rem; font-weight: 300; color: var(--gold); margin-bottom: 0.3rem; }
-    .tagline { font-size: 1.2rem; color: var(--muted); margin-bottom: 3rem; }
-    h2 { font-size: 1.5rem; font-weight: 400; color: var(--gold); margin: 3rem 0 1.2rem; border-bottom: 1px solid #222; padding-bottom: 0.4rem; }
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 2rem 0; }
-    .stat { background: var(--card-bg); border-radius: 8px; padding: 1.2rem; text-align: center; }
-    .stat-number { font-size: 2rem; font-weight: 700; color: var(--gold); }
-    .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
-    .component { background: var(--card-bg); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; border-left: 3px solid var(--green); }
-    .component-name { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
-    .component-desc { font-size: 0.95rem; color: var(--muted); }
-    .code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.8rem; background: #1a1a1a; padding: 1.2rem; border-radius: 6px; overflow-x: auto; margin: 1rem 0; white-space: pre; color: var(--text); line-height: 1.5; }
-    .flow { display: flex; flex-direction: column; gap: 0.5rem; margin: 1.5rem 0; }
-    .flow-step { display: flex; align-items: center; gap: 0.8rem; }
-    .flow-arrow { color: var(--gold); font-size: 1.2rem; min-width: 24px; text-align: center; }
-    .flow-box { background: var(--card-bg); border: 1px solid #333; border-radius: 6px; padding: 0.6rem 1rem; font-size: 0.9rem; flex: 1; }
-    .cta { margin-top: 3rem; text-align: center; }
-    .cta a { display: inline-block; background: var(--gold); color: var(--bg); padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 1.1rem; }
-    .cta a:hover { opacity: 0.9; }
-    footer { margin-top: 4rem; text-align: center; font-size: 0.8rem; color: var(--muted); }
-    .badge { display: inline-block; font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 3px; margin-left: 0.5rem; vertical-align: middle; }
-    .badge-live { background: #1a3a2a; color: var(--green); }
-    .badge-python { background: #1a2a4a; color: var(--blue); }
+    h1 { font-size: 2rem; font-weight: 300; color: var(--gold); margin-bottom: 0.3rem; }
+    .subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2.5rem; }
+    .legend { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 2rem; font-size: 0.8rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-green { background: var(--green); }
+    .dot-yellow { background: var(--yellow); }
+    .dot-red { background: var(--red); }
+    .dot-muted { background: var(--muted); }
+
+    .idea { background: var(--card-bg); border-radius: 8px; margin-bottom: 1.2rem; overflow: hidden; }
+    .idea-header { padding: 1.2rem 1.5rem; cursor: default; display: flex; align-items: flex-start; gap: 1rem; }
+    .idea-num { font-size: 0.75rem; color: var(--muted); min-width: 24px; padding-top: 0.2rem; }
+    .idea-title { font-size: 1.1rem; font-weight: 600; flex: 1; }
+    .idea-fit { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 3px; white-space: nowrap; height: fit-content; }
+    .fit-strong { background: #1a3a2a; color: var(--green); }
+    .fit-partial { background: #3a3a1a; color: var(--yellow); }
+    .fit-none { background: #1a1a1a; color: var(--muted); }
+
+    .idea-body { padding: 0 1.5rem 1.2rem 3.5rem; }
+    .yc-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.8rem; font-style: italic; }
+    .my-work { margin-top: 0.6rem; }
+    .my-work h4 { font-size: 0.85rem; color: var(--gold); margin-bottom: 0.4rem; font-weight: 400; }
+    .asset { display: flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0; font-size: 0.88rem; border-bottom: 1px solid #1a1a1a; }
+    .asset:last-child { border-bottom: none; }
+    .asset-status { font-size: 0.7rem; padding: 0.15rem 0.4rem; border-radius: 3px; min-width: 70px; text-align: center; }
+    .status-live { background: #1a3a2a; color: var(--green); }
+    .status-built { background: #1a2a3a; color: var(--blue); }
+    .status-wip { background: #3a3a1a; color: var(--yellow); }
+    .status-idea { background: #1a1a1a; color: var(--muted); }
+    .status-stalled { background: #3a1a1a; color: var(--red); }
+    .asset-name { flex: 1; }
+    .asset-path { font-size: 0.7rem; color: var(--muted); font-family: monospace; }
+
+    .no-work { font-size: 0.85rem; color: var(--muted); padding: 0.4rem 0; }
+    .summary { background: var(--card-bg); border: 1px solid var(--gold); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+    .summary h3 { color: var(--gold); font-size: 1.1rem; margin-bottom: 0.8rem; }
+    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem; }
+    .summary-grid dt { color: var(--muted); }
+    .summary-grid dd { font-weight: 600; }
+    footer { margin-top: 3rem; text-align: center; font-size: 0.75rem; color: var(--muted); }
   </style>
 </head>
 <body>
-  <h1>SameerAI Agent Toolkit</h1>
-  <p class="tagline">Infrastructure for AI coding agents that route, remember, and self-organize.</p>
+  <h1>YC S26 Ideas x My Work</h1>
+  <p class="subtitle">Personal tracker. 15 YC startup ideas mapped to what I actually have built, building, or could build. Updated 24 May 2026.</p>
 
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-number">3</div>
-      <div class="stat-label">Model tiers routed</div>
+  <div class="legend">
+    <div class="legend-item"><div class="dot dot-green"></div> Strong fit</div>
+    <div class="legend-item"><div class="dot dot-yellow"></div> Partial fit</div>
+    <div class="legend-item"><div class="dot dot-red"></div> No fit</div>
+  </div>
+
+  <!-- IDEA 1 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#1</span>
+      <span class="idea-title">AI for Low-Pesticide Agriculture</span>
+      <span class="idea-fit fit-none">no fit</span>
     </div>
-    <div class="stat">
-      <div class="stat-number">30+</div>
-      <div class="stat-label">Skills auto-discovered</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">&lt;50ms</div>
-      <div class="stat-label">Routing latency</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">40+</div>
-      <div class="stat-label">Sessions/week</div>
+    <div class="idea-body">
+      <div class="yc-desc">AI + sensors + robotics to help farmers reduce chemical use while maintaining yields.</div>
+      <div class="no-work">No assets. Domain mismatch (hardware/biology).</div>
     </div>
   </div>
 
-  <h2>How It Works</h2>
-
-  <div class="flow">
-    <div class="flow-step">
-      <span class="flow-arrow">1</span>
-      <div class="flow-box">User prompt arrives via Claude Code hook</div>
+  <!-- IDEA 2 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#2</span>
+      <span class="idea-title">AI-Native Service Companies</span>
+      <span class="idea-fit fit-partial">partial</span>
     </div>
-    <div class="flow-step">
-      <span class="flow-arrow">2</span>
-      <div class="flow-box"><strong>Model Router</strong> classifies: Haiku (reads) / Sonnet (dev) / Opus (architecture)</div>
+    <div class="idea-body">
+      <div class="yc-desc">Replace entire service categories (insurance, accounting, compliance) with AI, not just automate them.</div>
+      <div class="my-work">
+        <h4>What I have:</h4>
+        <div class="asset">
+          <span class="asset-status status-wip">WIP</span>
+          <span class="asset-name">Tax App (Dutch expat tax planner)</span>
+          <span class="asset-path">KiroCodingAcademy/Tax-app-using-agents/</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">FinancialHealthDashboard (payslip parser + auth-gated)</span>
+          <span class="asset-path">mahalakxmiblessings.pages.dev</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-wip">WIP</span>
+          <span class="asset-name">1099 data incorporation (Morgan Stanley)</span>
+          <span class="asset-path">data.json + pdftotext pipeline</span>
+        </div>
+      </div>
     </div>
-    <div class="flow-step">
-      <span class="flow-arrow">3</span>
-      <div class="flow-box"><strong>Skill Matcher</strong> fuzzy-matches intent against 30+ registered skills</div>
+  </div>
+
+  <!-- IDEA 3 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#3</span>
+      <span class="idea-title">AI Personalized Medicine</span>
+      <span class="idea-fit fit-none">no fit</span>
     </div>
-    <div class="flow-step">
-      <span class="flow-arrow">4</span>
-      <div class="flow-box">Agent executes with full <strong>memory context</strong> (semantic + episodic + working)</div>
-    </div>
-    <div class="flow-step">
-      <span class="flow-arrow">5</span>
-      <div class="flow-box"><strong>Auto-capture</strong> persists decisions, corrections, files for next session</div>
+    <div class="idea-body">
+      <div class="yc-desc">Genome sequencing + mRNA + AI analysis for customized treatment protocols.</div>
+      <div class="no-work">No assets. Requires biotech/genomics domain.</div>
     </div>
   </div>
 
-  <h2>Components</h2>
-
-  <div class="component">
-    <div class="component-name">Model Router <span class="badge badge-python">Python</span> <span class="badge badge-live">production</span></div>
-    <div class="component-desc">Regex-based classifier. Reads prompt, matches against Opus signals (architecture, security, tradeoffs) and Haiku signals (reads, searches, renames). Routes to correct model tier. No LLM call, pure pattern match.</div>
+  <!-- IDEA 4 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#4</span>
+      <span class="idea-title">Company Brain</span>
+      <span class="idea-fit fit-strong">strong fit</span>
+    </div>
+    <div class="idea-body">
+      <div class="yc-desc">Aggregate fragmented company knowledge (emails, Slack, tickets, employees) into executable skills file for AI agents.</div>
+      <div class="my-work">
+        <h4>What I have:</h4>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">SameerAI Memory Protocol (3-layer: semantic + episodic + working)</span>
+          <span class="asset-path">~/.claude/projects/*/memory/</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">Skill Matcher (auto-discovers 30+ skills from descriptions)</span>
+          <span class="asset-path">hooks/skill-matcher.py</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">Context Save/Restore (checkpoint working state across sessions)</span>
+          <span class="asset-path">gstack context-save / context-restore</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">Episodic capture (auto-logs decisions, corrections, files)</span>
+          <span class="asset-path">~/.claude/episodic/episodic.sh</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-built">BUILT</span>
+          <span class="asset-name">Brain Tree (visual memory pruner)</span>
+          <span class="asset-path">~/.claude/brain-tree/index.html (localhost:7331)</span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="component">
-    <div class="component-name">Skill Matcher <span class="badge badge-python">Python</span> <span class="badge badge-live">production</span></div>
-    <div class="component-desc">Scans all skill directories, extracts keywords from SKILL.md descriptions, fuzzy-matches against user intent, injects top matches as context. Agent discovers capabilities on every prompt.</div>
+  <!-- IDEA 5 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#5</span>
+      <span class="idea-title">Counter-Swarm Defense</span>
+      <span class="idea-fit fit-none">no fit</span>
+    </div>
+    <div class="idea-body">
+      <div class="yc-desc">Defending against coordinated drone swarms. Interceptors, sensor fusion, autonomy stack attacks.</div>
+      <div class="no-work">No assets. Hardware/defense domain.</div>
+    </div>
   </div>
 
-  <div class="component">
-    <div class="component-name">Memory Protocol <span class="badge badge-live">production</span></div>
-    <div class="component-desc">Three-layer persistence: semantic (cross-session, manual prune), episodic (per-tab, auto-prune at 50 facts/7d/30d), working (current turn). Frontmatter-based format with typed categories.</div>
+  <!-- IDEA 6 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#6</span>
+      <span class="idea-title">Dynamic Software Interfaces</span>
+      <span class="idea-fit fit-strong">strong fit</span>
+    </div>
+    <div class="idea-body">
+      <div class="yc-desc">Software that adapts UI per individual needs. AI coding agents enabling users to customize their experience.</div>
+      <div class="my-work">
+        <h4>What I have:</h4>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">Model Router (adapts AI behavior per prompt type)</span>
+          <span class="asset-path">model-router-classify.py</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">Caveman Mode (adaptive communication compression)</span>
+          <span class="asset-path">gstack caveman (lite/full/ultra)</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-stalled">STALLED</span>
+          <span class="asset-name">1Q v4 (iOS app with adaptive onboarding + personalized questions)</span>
+          <span class="asset-path">KiroCodingAcademy/OneQuestion/</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-built">BUILT</span>
+          <span class="asset-name">Liquid Glass UI standard (dark iOS theme, adaptive)</span>
+          <span class="asset-path">KiroCodingAcademy/STANDARDS.md</span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="component">
-    <div class="component-name">Backend Switcher</div>
-    <div class="component-desc">Manages multiple AWS Bedrock profiles. Swap between free/paid/isolated accounts with one command. Settings stored as named JSON configs, copied to active on switch.</div>
+  <!-- IDEA 7 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#7</span>
+      <span class="idea-title">Electronics in Space</span>
+      <span class="idea-fit fit-none">no fit</span>
+    </div>
+    <div class="idea-body">
+      <div class="yc-desc">Inference chips optimized for space (mass, thermal, radiation).</div>
+      <div class="no-work">No assets. Chip design domain.</div>
+    </div>
   </div>
 
-  <div class="component">
-    <div class="component-name">Task Router</div>
-    <div class="component-desc">Classifies task intent and dispatches to correct execution backend. Enterprise tasks, coding tasks, and planning tasks each go to their optimal environment. Human approves routing.</div>
+  <!-- IDEA 8 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#8</span>
+      <span class="idea-title">Hardware Supply Chain</span>
+      <span class="idea-fit fit-none">no fit</span>
+    </div>
+    <div class="idea-body">
+      <div class="yc-desc">Rapid physical prototyping infrastructure. Close the speed gap with Shenzhen.</div>
+      <div class="no-work">No assets. Physical manufacturing domain.</div>
+    </div>
   </div>
 
-  <h2>Example: Model Router in Action</h2>
+  <!-- IDEA 9 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#9</span>
+      <span class="idea-title">Industrial Capabilities in Space</span>
+      <span class="idea-fit fit-none">no fit</span>
+    </div>
+    <div class="idea-body">
+      <div class="yc-desc">Extracting and processing lunar resources for space-based manufacturing.</div>
+      <div class="no-work">No assets. Space/manufacturing domain.</div>
+    </div>
+  </div>
 
-  <div class="code">$ echo '{"tool_input":{"prompt":"review the authentication architecture"}}' | python3 model-router-classify.py
+  <!-- IDEA 10 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#10</span>
+      <span class="idea-title">Inference Chips for Agent Workflows</span>
+      <span class="idea-fit fit-none">no fit</span>
+    </div>
+    <div class="idea-body">
+      <div class="yc-desc">Chips designed for agent loops (tool calling, branching, context persistence) not simple inference.</div>
+      <div class="no-work">No assets. Chip design. Though I deeply understand the workflow patterns these chips would serve.</div>
+    </div>
+  </div>
 
-{
-  "systemMessage": "[model-router] OPUS tier - architecture review",
-  "hookSpecificOutput": {
-    "hookEventName": "UserPromptSubmit",
-    "additionalContext": "model-router pre-classification: OPUS tier (architecture review). Recommended model: claude-opus-4-7."
-  }
-}
+  <!-- IDEA 11 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#11</span>
+      <span class="idea-title">SaaS Challengers</span>
+      <span class="idea-fit fit-partial">partial</span>
+    </div>
+    <div class="idea-body">
+      <div class="yc-desc">AI-native replacements for legacy software (ERPs, chip design tools, industrial control, supply chain).</div>
+      <div class="my-work">
+        <h4>What I have:</h4>
+        <div class="asset">
+          <span class="asset-status status-wip">WIP</span>
+          <span class="asset-name">Tax app could become AI-native tax filing replacement</span>
+          <span class="asset-path">KiroCodingAcademy/Tax-app-using-agents/</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-idea">IDEA</span>
+          <span class="asset-name">Need to pick a vertical and go deep</span>
+          <span class="asset-path">-</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-$ echo '{"tool_input":{"prompt":"rename getUserById to fetchUser"}}' | python3 model-router-classify.py
+  <!-- IDEA 12 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#12</span>
+      <span class="idea-title">Software for Agents</span>
+      <span class="idea-fit fit-strong">strong fit</span>
+    </div>
+    <div class="idea-body">
+      <div class="yc-desc">Machine-readable interfaces and APIs enabling AI agents to discover, access, and use tools programmatically without human intervention.</div>
+      <div class="my-work">
+        <h4>What I have (this is my strongest fit):</h4>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">MCP Skill Registry (30+ skills, machine-discoverable)</span>
+          <span class="asset-path">gstack skills + plugin system</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">Skill Matcher (fuzzy intent matching, auto-invokes relevant skill)</span>
+          <span class="asset-path">hooks/skill-matcher.py</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">Agent-to-Agent Bridging (Claude + Codex + Kiro CLI)</span>
+          <span class="asset-path">commands/backend.md + route.md</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">Model Router (auto-dispatch to correct model tier)</span>
+          <span class="asset-path">model-router-classify.py</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">Pair Agent (remote agent gets browser access via HTTP)</span>
+          <span class="asset-path">gstack pair-agent</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-built">BUILT</span>
+          <span class="asset-name">AI Free Proxy (Cloudflare Worker, multi-model API)</span>
+          <span class="asset-path">ai-free-proxy.sameergoel-portfolio-api.workers.dev</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-built">BUILT</span>
+          <span class="asset-name">NVIDIA NIM Tester (tests 50 free endpoints)</span>
+          <span class="asset-path">KiroCodingAcademy/nvidia-ai-tester/</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-{
-  "systemMessage": "[model-router] HAIKU tier - mechanical rename",
-  ...
-}</div>
+  <!-- IDEA 13 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#13</span>
+      <span class="idea-title">Startups That Want to Sell to Huge Companies</span>
+      <span class="idea-fit fit-partial">partial</span>
+    </div>
+    <div class="idea-body">
+      <div class="yc-desc">Small teams solving critical problems for Fortune 10 companies, closing deals in year one.</div>
+      <div class="my-work">
+        <h4>What I have:</h4>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">Amazon enterprise context (PSA Agent, Sentral, Builder MCP)</span>
+          <span class="asset-path">Work access, domain knowledge</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-idea">IDEA</span>
+          <span class="asset-name">Solo + no sales team. Would need co-founder or niche product.</span>
+          <span class="asset-path">-</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <h2>Built For</h2>
-  <p>YC S26 RFS #12: <strong>Software for Agents</strong>. Machine-readable interfaces enabling AI agents to discover, access, and use tools programmatically.</p>
-  <p>This toolkit solves the problem from the inside: an agent that knows what model to use, what skills it has, and what it learned yesterday, without being told every session.</p>
+  <!-- IDEA 14 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#14</span>
+      <span class="idea-title">Supply Chain 2.0 for Semiconductors</span>
+      <span class="idea-fit fit-none">no fit</span>
+    </div>
+    <div class="idea-body">
+      <div class="yc-desc">Real-time tracking, multi-tier risk monitoring, export compliance for semiconductor supply chain.</div>
+      <div class="no-work">No assets. Semiconductor domain.</div>
+    </div>
+  </div>
 
-  <div class="cta">
-    <a href="https://github.com/sameer-goel/sameerai-agent-toolkit">View Source on GitHub</a>
+  <!-- IDEA 15 -->
+  <div class="idea">
+    <div class="idea-header">
+      <span class="idea-num">#15</span>
+      <span class="idea-title">The AI Operating System for Companies</span>
+      <span class="idea-fit fit-strong">strong fit</span>
+    </div>
+    <div class="idea-body">
+      <div class="yc-desc">Unified intelligence layer connecting Slack, Linear, GitHub, Notion into a single queryable company knowledge system.</div>
+      <div class="my-work">
+        <h4>What I have:</h4>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">SameerAI (unified layer: Slack + GitHub + Outlook + Sentral + memory)</span>
+          <span class="asset-path">~/.claude/ (full system)</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">MCP integrations (Slack, Outlook, Sharepoint, Builder tools)</span>
+          <span class="asset-path">MCP servers in settings.json</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">Context Memory Protocol (queryable knowledge across sessions)</span>
+          <span class="asset-path">memory-protocol/PROTOCOL.md</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-live">LIVE</span>
+          <span class="asset-name">40+ sessions/week, 12+ projects connected through single brain</span>
+          <span class="asset-path">Daily production use</span>
+        </div>
+        <div class="asset">
+          <span class="asset-status status-wip">WIP</span>
+          <span class="asset-name">gbrain (PGLite/Supabase knowledge graph for code)</span>
+          <span class="asset-path">gstack setup-gbrain / sync-gbrain</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <h3>Score Card</h3>
+    <div class="summary-grid">
+      <dt>Strong fit:</dt><dd>4 ideas (#4, #6, #12, #15)</dd>
+      <dt>Partial fit:</dt><dd>3 ideas (#2, #11, #13)</dd>
+      <dt>No fit:</dt><dd>8 ideas</dd>
+      <dt>Assets LIVE:</dt><dd>15+ running in production</dd>
+      <dt>Assets STALLED:</dt><dd>1Q v4 (11 days idle)</dd>
+      <dt>Primary opportunity:</dt><dd>#12 Software for Agents</dd>
+      <dt>Overlap:</dt><dd>#4 + #12 + #15 are the same system seen from 3 angles</dd>
+    </div>
   </div>
 
   <footer>
-    Built by Sameer Goel. Running daily since May 2026.<br>
-    Claude Code + AWS Bedrock + Cloudflare.
+    Private tracker. Generated 24 May 2026. Source: thevccorner.com/p/yc-summer-2026-requests-for-startups-ideas
   </footer>
 </body>
 </html>
