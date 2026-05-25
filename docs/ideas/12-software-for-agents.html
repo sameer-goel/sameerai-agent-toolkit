@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#12 Software for Agents - Brainstorm</title>
+  <style>
+    :root {
+      --bg: #060606;
+      --text: #F8F5F0;
+      --gold: #F8D264;
+      --muted: #8a8680;
+      --card-bg: #111110;
+      --green: #4ade80;
+      --yellow: #facc15;
+      --blue: #60a5fa;
+      --purple: #a78bfa;
+      --red: #f87171;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      max-width: 860px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back { font-size: 0.85rem; display: inline-block; margin-bottom: 1.5rem; }
+    h1 { font-size: 1.8rem; font-weight: 300; color: var(--gold); margin-bottom: 0.2rem; }
+    .fit-badge { display: inline-block; background: #1a3a2a; color: var(--green); font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 3px; margin-bottom: 1.5rem; }
+    h2 { font-size: 1.3rem; font-weight: 400; color: var(--gold); margin: 2.5rem 0 0.8rem; border-bottom: 1px solid #222; padding-bottom: 0.3rem; }
+    h3 { font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+    p { margin-bottom: 0.8rem; }
+    blockquote { border-left: 3px solid var(--gold); padding: 0.8rem 1.2rem; background: var(--card-bg); margin: 1rem 0; font-style: italic; font-size: 0.95rem; }
+    ul { margin: 0.5rem 0 1rem 1.5rem; }
+    li { margin-bottom: 0.4rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.88rem; }
+    th { text-align: left; padding: 0.6rem 0.8rem; background: var(--card-bg); color: var(--gold); border-bottom: 1px solid #333; }
+    td { padding: 0.6rem 0.8rem; border-bottom: 1px solid #1a1a1a; vertical-align: top; }
+    .tag { display: inline-block; font-size: 0.7rem; padding: 0.15rem 0.4rem; border-radius: 3px; margin-right: 0.3rem; }
+    .tag-funded { background: #1a3a2a; color: var(--green); }
+    .tag-oss { background: #1a2a3a; color: var(--blue); }
+    .tag-yc { background: #3a2a1a; color: var(--yellow); }
+    .tag-big { background: #2a1a3a; color: var(--purple); }
+    .section-card { background: var(--card-bg); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+    .solution-box { background: var(--card-bg); border: 1px solid var(--green); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+    .gap-box { background: var(--card-bg); border: 1px solid var(--gold); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+    .next-box { background: var(--card-bg); border: 1px solid var(--blue); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+    footer { margin-top: 3rem; text-align: center; font-size: 0.75rem; color: var(--muted); border-top: 1px solid #222; padding-top: 1rem; }
+  </style>
+</head>
+<body>
+  <a class="back" href="index.html">&larr; All ideas</a>
+
+  <h1>#12 Software for Agents</h1>
+  <span class="fit-badge">STRONGEST FIT</span>
+
+  <h2>The Problem (from YC)</h2>
+  <blockquote>
+    "The next trillion users on the internet will be AI agents. They need completely different software."
+    <br><br>
+    "While everyone else is building agents, the biggest opportunity might be building the software those agents depend on."
+    <br><span style="font-size: 0.8rem; color: var(--muted);">- Aaron Epstein, YC Partner</span>
+  </blockquote>
+
+  <p>Agents perform browsing, research, purchasing, CRM management on interfaces designed for humans. This creates slowness, inconsistency, fragility. YC wants: machine-readable interfaces, APIs, MCPs, CLIs with thorough documentation and discovery tools.</p>
+
+  <h2>Existing Players</h2>
+  <p>Who's already building in this space:</p>
+
+  <table>
+    <tr>
+      <th>Company</th>
+      <th>What they do</th>
+      <th>Category</th>
+      <th>Link</th>
+    </tr>
+    <tr>
+      <td><strong>Anthropic MCP</strong></td>
+      <td>Model Context Protocol. Open standard for agent-tool communication. Server/client pattern.</td>
+      <td><span class="tag tag-big">Big Co</span></td>
+      <td><a href="https://modelcontextprotocol.io" target="_blank">modelcontextprotocol.io</a></td>
+    </tr>
+    <tr>
+      <td><strong>Composio</strong></td>
+      <td>250+ pre-built tool integrations for AI agents. Auth management, multi-framework.</td>
+      <td><span class="tag tag-funded">$4.5M Seed</span></td>
+      <td><a href="https://composio.dev" target="_blank">composio.dev</a></td>
+    </tr>
+    <tr>
+      <td><strong>Arcade AI</strong></td>
+      <td>Tool-use platform. Agents call APIs with managed auth, retries, type safety.</td>
+      <td><span class="tag tag-yc">YC W24</span></td>
+      <td><a href="https://arcade.dev" target="_blank">arcade.dev</a></td>
+    </tr>
+    <tr>
+      <td><strong>LangChain / LangSmith</strong></td>
+      <td>Agent framework + observability. Tool calling, chains, memory. Market leader in dev tooling.</td>
+      <td><span class="tag tag-funded">$25M Series A</span></td>
+      <td><a href="https://langchain.com" target="_blank">langchain.com</a></td>
+    </tr>
+    <tr>
+      <td><strong>CrewAI</strong></td>
+      <td>Multi-agent orchestration framework. Role-based agents with tool delegation.</td>
+      <td><span class="tag tag-funded">$18M Series A</span></td>
+      <td><a href="https://crewai.com" target="_blank">crewai.com</a></td>
+    </tr>
+    <tr>
+      <td><strong>Toolhouse</strong></td>
+      <td>Cloud-hosted tool execution for LLMs. Universal SDK, any framework.</td>
+      <td><span class="tag tag-yc">YC S24</span></td>
+      <td><a href="https://toolhouse.ai" target="_blank">toolhouse.ai</a></td>
+    </tr>
+    <tr>
+      <td><strong>E2B</strong></td>
+      <td>Sandboxed code execution for AI agents. Secure runtime environments.</td>
+      <td><span class="tag tag-yc">YC W23</span></td>
+      <td><a href="https://e2b.dev" target="_blank">e2b.dev</a></td>
+    </tr>
+    <tr>
+      <td><strong>Browserbase</strong></td>
+      <td>Headless browser infra for agents. Navigate real web, scrape, fill forms.</td>
+      <td><span class="tag tag-yc">YC W24</span></td>
+      <td><a href="https://browserbase.com" target="_blank">browserbase.com</a></td>
+    </tr>
+    <tr>
+      <td><strong>Smithery</strong></td>
+      <td>MCP server registry. Discover, install, manage MCP servers.</td>
+      <td><span class="tag tag-oss">OSS</span></td>
+      <td><a href="https://smithery.ai" target="_blank">smithery.ai</a></td>
+    </tr>
+    <tr>
+      <td><strong>Mintlify</strong></td>
+      <td>AI-optimized documentation. Structured for agent consumption, not just human reading.</td>
+      <td><span class="tag tag-yc">YC W22</span></td>
+      <td><a href="https://mintlify.com" target="_blank">mintlify.com</a></td>
+    </tr>
+    <tr>
+      <td><strong>OpenAI Plugins/Actions</strong></td>
+      <td>Custom GPT actions. OpenAPI spec to tool. Proprietary, ChatGPT-only.</td>
+      <td><span class="tag tag-big">Big Co</span></td>
+      <td><a href="https://platform.openai.com/docs/actions" target="_blank">platform.openai.com</a></td>
+    </tr>
+    <tr>
+      <td><strong>Wild Card (Zapier)</strong></td>
+      <td>AI Actions. 30K+ integrations exposed as LLM tools via natural language.</td>
+      <td><span class="tag tag-big">Big Co</span></td>
+      <td><a href="https://actions.zapier.com" target="_blank">actions.zapier.com</a></td>
+    </tr>
+  </table>
+
+  <h2>The Gap (What's Missing)</h2>
+  <div class="gap-box">
+    <h3>Nobody is solving:</h3>
+    <ul>
+      <li><strong>Agent self-organization:</strong> agents that learn what tools to use without being told each time. Existing solutions require explicit wiring.</li>
+      <li><strong>Cross-model skill portability:</strong> skills written for Claude don't work in GPT or Gemini. No universal skill format.</li>
+      <li><strong>Cost-aware routing:</strong> agents burn expensive models on simple tasks. No one auto-routes cheap model for reads, expensive for architecture.</li>
+      <li><strong>Memory persistence that works:</strong> agents forget everything between sessions. LangChain memory is crude (full chat history). No structured, typed, pruning memory.</li>
+      <li><strong>Agent-to-agent handoff:</strong> Claude can't delegate to Codex mid-task. No bridge protocol for multi-vendor agent collaboration.</li>
+    </ul>
+  </div>
+
+  <h2>My Solution Angle</h2>
+  <div class="solution-box">
+    <h3>What I've built that addresses the gap:</h3>
+    <table>
+      <tr><th>Gap</th><th>My Asset</th><th>Status</th></tr>
+      <tr>
+        <td>Agent self-organization</td>
+        <td>Skill Matcher: fuzzy-matches intent against all registered skills, injects relevant ones</td>
+        <td style="color: var(--green);">LIVE</td>
+      </tr>
+      <tr>
+        <td>Cost-aware routing</td>
+        <td>Model Router: regex classifier, <50ms, routes haiku/sonnet/opus per prompt</td>
+        <td style="color: var(--green);">LIVE</td>
+      </tr>
+      <tr>
+        <td>Memory persistence</td>
+        <td>3-layer memory: semantic (typed frontmatter) + episodic (auto-prune) + working</td>
+        <td style="color: var(--green);">LIVE</td>
+      </tr>
+      <tr>
+        <td>Agent-to-agent handoff</td>
+        <td>Backend Switcher + Task Router: dispatch to Claude/Codex/Kiro per task type</td>
+        <td style="color: var(--green);">LIVE</td>
+      </tr>
+      <tr>
+        <td>Cross-model portability</td>
+        <td>Not solved yet. Skills are Claude Code specific (markdown SKILL.md format).</td>
+        <td style="color: var(--yellow);">GAP</td>
+      </tr>
+    </table>
+
+    <h3>My unique angle vs existing players:</h3>
+    <ul>
+      <li><strong>Composio/Arcade</strong> give agents tools. I give agents <em>the ability to discover which tool to use and route to the cheapest model that can handle it</em>.</li>
+      <li><strong>LangChain</strong> is a framework you build on. Mine is a layer that wraps any existing agent (Claude Code, Codex, Kiro) without replacing it.</li>
+      <li><strong>MCP</strong> is the protocol. I build the intelligence layer ON TOP: which MCP to call, when, with what model, and remember why.</li>
+    </ul>
+  </div>
+
+  <h2>What to Build Next</h2>
+  <div class="next-box">
+    <h3>To make this a product (not just personal tooling):</h3>
+    <ol>
+      <li><strong>Make skill-matcher framework-agnostic.</strong> Currently reads Claude Code SKILL.md. Should read: OpenAPI specs, MCP manifests, function schemas, tool descriptions from any source.</li>
+      <li><strong>Package model-router as standalone.</strong> pip install, npm install, or single binary. Config file for tiers + model IDs. Works with any LLM provider.</li>
+      <li><strong>Memory protocol as a service.</strong> API: store, recall, prune. Not tied to filesystem. Could be SaaS (hosted memory for agents) or OSS (self-hosted).</li>
+      <li><strong>Demo: "agent that gets smarter each session."</strong> Record 5 sessions. Show the agent remembering corrections, routing efficiently, discovering new skills. That's the YC demo.</li>
+    </ol>
+
+    <h3>Minimum effort to validate:</h3>
+    <ul>
+      <li>Extract model-router into standalone pip package (2h)</li>
+      <li>Add OpenAPI spec scanning to skill-matcher (4h)</li>
+      <li>Record demo video showing memory + routing in action (1h)</li>
+      <li>Post on HN Show HN + r/ClaudeAI + X (30min)</li>
+    </ul>
+  </div>
+
+  <h2>Competitive Positioning</h2>
+  <div class="section-card">
+    <table>
+      <tr><th>Dimension</th><th>Existing solutions</th><th>My approach</th></tr>
+      <tr>
+        <td>Model</td>
+        <td>Single-model (LangChain = OpenAI-first, CrewAI = one model per agent)</td>
+        <td>Multi-model by default. Route per task.</td>
+      </tr>
+      <tr>
+        <td>Memory</td>
+        <td>Chat history buffer or vector store (crude, no types, no pruning)</td>
+        <td>Typed, layered, auto-pruning. Structured capture.</td>
+      </tr>
+      <tr>
+        <td>Discovery</td>
+        <td>Explicit wiring (you tell the agent what tools exist)</td>
+        <td>Auto-discovery from skill descriptions. Agent finds what it can do.</td>
+      </tr>
+      <tr>
+        <td>Cost</td>
+        <td>Fixed model, no routing. Burns expensive tokens on simple tasks.</td>
+        <td>Regex classifier in <50ms. 3x cost reduction on simple ops.</td>
+      </tr>
+      <tr>
+        <td>Vendor lock-in</td>
+        <td>Framework-specific (LangChain, CrewAI) or platform-specific (OpenAI Actions)</td>
+        <td>Wrapper pattern. Sits on top of any agent. No rewrite needed.</td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>Key Questions to Answer</h2>
+  <ul>
+    <li>Is this a platform (host skills/memory for others) or a tool (install into your own agent)?</li>
+    <li>Who pays? The agent developer? The agent operator? The tool provider who wants discovery?</li>
+    <li>Open source the core and monetize hosting? Or proprietary with free tier?</li>
+    <li>Start B2D (developers) or B2B (enterprise agent teams)?</li>
+    <li>Solo founder viable? Or need co-founder with sales/distribution?</li>
+  </ul>
+
+  <footer>
+    Private brainstorm. Updated 25 May 2026.<br>
+    Next: <a href="04-company-brain.html">#4 Company Brain</a>
+  </footer>
+</body>
+</html>
